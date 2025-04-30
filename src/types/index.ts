@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 export { PulseFrame } from './pulse-frame';
 export { PulseFrameBuildOptions } from './pulse-frame-build-options';
 export { PulseFrameExtensionSupport } from './pulse-frame-extension-support';
