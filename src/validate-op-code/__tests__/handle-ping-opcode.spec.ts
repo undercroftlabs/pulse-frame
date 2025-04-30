@@ -1,0 +1,28 @@
+import { PulseFrameHeader } from '@/types/pulse-frame-header';
+import { PulseFrameOpcode } from '@/types/pulse-frame-opcode';
+import { validateOpcode } from '..';
+
+/**
+ * @spec RFC 6455 §5.5.2 - Ping Control Frame
+ *
+ * This test ensures that the PING opcode (0x9) is accepted when:
+ * - FIN is set to 1 (control frames must not be fragmented).
+ * - Payload length does not exceed 125 bytes.
+ */
+describe('validateOpcode', () => {
+    it('rfc-6455-5.5.2 allows valid PING control frame', () => {
+      const header: PulseFrameHeader = {
+        opcode: PulseFrameOpcode.PING,
+        fin: 1,
+        rsv1: 0,
+        rsv2: 0,
+        rsv3: 0,
+        mask: 0,
+        length: 5,
+        extensionDataLength: 0,
+        maskingKey: undefined,
+      };
+  
+      expect(() => validateOpcode(header)).not.toThrow();
+    });
+  });
